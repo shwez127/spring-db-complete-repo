@@ -1,9 +1,9 @@
-# trigger:
-# - main
 trigger:
-  branches:
-    exclude:
-      - main
+- main
+# trigger:
+#   branches:
+#     exclude:
+#       - main
 
 
 pool:
