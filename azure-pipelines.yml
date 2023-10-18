@@ -1,5 +1,10 @@
+# trigger:
+# - main
 trigger:
-- main
+  branches:
+    exclude:
+      - main
+
 
 pool:
   vmImage: ubuntu-latest
