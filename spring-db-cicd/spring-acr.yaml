@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring
+  namespace: shwe1 # Added namespace where the deployment will be created
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring
+  template:
+    metadata:
+      labels:
+        app: spring
+    spec:
+      containers:
+      - name: spring
+        image: myacr127.azurecr.io/spring-db-cicd:latest   #use shwetha12712712/spring-boot-mongo-docker image if you want to provide db port dynamically, bcox in the dockerhandson image port is hardcoded
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_DB_HOSTNAME
+          value: db-svc  # If two pods are in different namespaces, consider using FQDN
+          # valueFrom:
+          #   configMapKeyRef:
+          #     name: db-cm
+          #     key: database_url
+
+                
+
+        - name: MONGO_DB_USERNAME
+          value: shwe
+          # valueFrom:
+          #   secretKeyRef:
+          #     name: mongodb-secret
+          #     key: username
+              
+        - name: MONGO_DB_PASSWORD 
+          value: shwe
+          # valueFrom:
+          #   secretKeyRef:
+          #     name: mongodb-secret
+          #     key: password
+      # imagePullSecrets:
+      # - name: acr-password
